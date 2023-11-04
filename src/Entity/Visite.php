@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Entity;
@@ -6,33 +5,51 @@ namespace App\Entity;
 use App\Repository\VisiteRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: VisiteRepository::class)]
+/**
+ * @ORM\Entity(repositoryClass=VisiteRepository::class)
+ */
 class Visite
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
     private $id;
 
-    #[ORM\Column(type: 'string', length: 50)]
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
     private $ville;
 
-    #[ORM\Column(type: 'string', length: 50)]
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
     private $pays;
 
-    #[ORM\Column(type: 'date', nullable: true)]
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
     private $datecreation;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
     private $note;
 
-    #[ORM\Column(type: 'text', nullable: true)]
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
     private $avis;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
     private $tempmin;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
     private $tempmax;
 
     public function getId(): ?int
@@ -64,9 +81,12 @@ class Visite
         return $this;
     }
 
-    public function getDatecreation(): ?\DateTimeInterface
+    public function getDatecreation():?\DateTimeInterface
     {
-        return $this->datecreation;
+       
+            return $this->datecreation;
+        
+        
     }
 
     public function setDatecreation(?\DateTimeInterface $datecreation): self
@@ -122,5 +142,15 @@ class Visite
         $this->tempmax = $tempmax;
 
         return $this;
+    }
+    
+     public function getDatecreationString():  string //?\DateTimeInterface
+    {
+        if($this->datecreation == null){
+            return "";
+        }else{
+            return $this->datecreation->format('d/m/Y');
+        }
+        
     }
 }
